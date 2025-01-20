@@ -56,41 +56,40 @@ async function signup(req, res) {
   }
 }
 
-async function login(req, res) {
-  try {
-    const { username, password } = req.body
-
-    if (!username || !password) {
-      return res.status(400).json({ error: "Missing required information" })
-    }
-
-    const user = await User.findOne({ where: { username } })
-
-    if (!user) {
-      return res.status(404).json({ error: "User not found" })
-    }
-
-    const validPassword = bcryptjs.compareSync(password, user.password)
-    if (!validPassword) {
-      return res.status(401).json({ error: "Invalid password" })
-    }
-
-    const token = jwt.sign({ id: user.id, username }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN,
-    })
-
-    return res.status(200).json({
-      token,
-      message: `User ${user.first_name} ${user.last_name} logged in successfully`,
-    })
-  } catch (error) {
-    console.error(error)
-    return res.status(500).json({ error: "Internal server error" })
-  }
-}
-
 const authController = {
   signup,
-  login,
 }
 module.exports = authController
+
+// async function login(req, res) {
+//   try {
+//     const { username, password } = req.body
+
+//     if (!username || !password) {
+//       return res.status(400).json({ error: "Missing required information" })
+//     }
+
+//     const user = await User.findOne({ where: { username } })
+
+//     if (!user) {
+//       return res.status(404).json({ error: "User not found" })
+//     }
+
+//     const validPassword = bcryptjs.compareSync(password, user.password)
+//     if (!validPassword) {
+//       return res.status(401).json({ error: "Invalid password" })
+//     }
+
+//     const token = jwt.sign({ id: user.id, username }, process.env.JWT_SECRET, {
+//       expiresIn: process.env.JWT_EXPIRES_IN,
+//     })
+
+//     return res.status(200).json({
+//       token,
+//       message: `User ${user.first_name} ${user.last_name} logged in successfully`,
+//     })
+//   } catch (error) {
+//     console.error(error)
+//     return res.status(500).json({ error: "Internal server error" })
+//   }
+// }

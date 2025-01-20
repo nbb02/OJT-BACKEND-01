@@ -1,6 +1,18 @@
 const User = require("../models/User.js")
 const { hashPassword } = require("../utils/utils.js")
 
+async function getUser(req, res) {
+  const { id } = req?.params
+
+  const user = await User.findByPk(id, {
+    attributes: { exclude: ["password"] },
+  })
+  if (!user) {
+    return res.status(404).json({ error: "User not found" })
+  }
+  return res.json(user)
+}
+
 async function getUsers(req, res) {
   const users = await User.findAll({
     attributes: { exclude: ["password"] },
@@ -9,7 +21,7 @@ async function getUsers(req, res) {
 }
 async function updateUser(req, res) {
   try {
-    const { id } = req.user
+    const id = req?.params?.id ?? req.user.id
 
     const user = await User.findByPk(id)
     if (!user) {
@@ -62,7 +74,7 @@ async function updateUser(req, res) {
 }
 async function deleteUser(req, res) {
   try {
-    const { id } = req.user
+    const id = req?.params?.id ?? req.user.id
 
     const user = await User.findByPk(id)
     if (!user) {
@@ -81,6 +93,7 @@ async function deleteUser(req, res) {
 }
 
 const userController = {
+  getUser,
   getUsers,
   updateUser,
   deleteUser,
