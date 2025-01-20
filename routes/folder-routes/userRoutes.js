@@ -1,6 +1,6 @@
-import express from "express"
-import userController from "../../controllers/userController.js"
-import authCheck from "../../middlewares/authCheck.js"
+const express = require("express")
+const userController = require("../../controllers/userController.js")
+const authCheck = require("../../middlewares/authCheck.js")
 
 const router = express.Router()
 
@@ -9,4 +9,4 @@ router.get("/", userController.getUsers)
 router.put("/", userController.updateUser)
 router.delete("/", userController.deleteUser)
 
-export default router
+module.exports = router

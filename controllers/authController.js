@@ -1,7 +1,7 @@
-import User from "../models/User.js"
-import { hashPassword } from "../utils/utils.js"
-import bcryptjs from "bcryptjs"
-import jwt from "jsonwebtoken"
+const User = require("../models/User.js")
+const { hashPassword } = require("../utils/utils.js")
+const bcryptjs = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 async function signup(req, res) {
   try {
@@ -93,4 +93,4 @@ const authController = {
   signup,
   login,
 }
-export default authController
+module.exports = authController

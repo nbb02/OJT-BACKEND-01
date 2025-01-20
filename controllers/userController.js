@@ -1,5 +1,5 @@
-import User from "../models/User.js"
-import { hashPassword } from "../utils/utils.js"
+const User = require("../models/User.js")
+const { hashPassword } = require("../utils/utils.js")
 
 async function getUsers(req, res) {
   const users = await User.findAll({
@@ -85,4 +85,4 @@ const userController = {
   updateUser,
   deleteUser,
 }
-export default userController
+module.exports = userController

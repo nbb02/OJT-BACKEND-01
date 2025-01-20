@@ -1,7 +1,7 @@
-import express from "express"
-import sequelize from "./connection/database.js"
-import userRoutes from "./routes/folder-routes/userRoutes.js"
-import authRoutes from "./routes/folder-routes/authRoutes.js"
+const express = require("express")
+const sequelize = require("./connection/database.js")
+const userRoutes = require("./routes/folder-routes/userRoutes.js")
+const authRoutes = require("./routes/folder-routes/authRoutes.js")
 
 const app = express()
 

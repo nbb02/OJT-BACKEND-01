@@ -1,7 +1,11 @@
-import bcryptjs from "bcryptjs"
+const bcryptjs = require("bcryptjs")
 
-export function hashPassword(password) {
+function hashPassword(password) {
   const salt = bcryptjs.genSaltSync(10)
   const hashedPassword = bcryptjs.hashSync(password, salt)
   return hashedPassword
+}
+
+module.exports = {
+  hashPassword,
 }

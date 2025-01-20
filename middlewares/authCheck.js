@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken"
+const jwt = require("jsonwebtoken")
 
-export default async function authCheck(req, res, next) {
+module.exports = async function authCheck(req, res, next) {
   const { authorization } = req.headers
 
   const token = authorization && authorization.split(" ")[1]
