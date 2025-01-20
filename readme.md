@@ -23,3 +23,5 @@ utils - utils.js contains password hashing function
 
 app.js - main
 passport.js - login and signup handlers
+
+migration uses sequelize-cli and is using different database - only created for learning
